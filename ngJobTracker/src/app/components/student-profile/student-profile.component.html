@@ -1,0 +1,98 @@
+
+<div *ngIf="editStudent">
+<!-- test -->
+<div class="container-fluid">
+    <div class="row">
+      <div id="profile" class="col-4">
+        <table>
+          <tr>
+            <td><h4>{{editStudent.firstName}} {{editStudent.lastName}}</h4></td>
+          </tr>
+          <tr><td> {{mainAddress.city}}, {{mainAddress.state}} </td></tr>
+<tr><td> Github : {{editStudent.githubUsername}}</td></tr>
+<tr><td> Email : {{editStudent.email}}</td></tr>
+<tr><td><button class="btn btn-primary" (click)='openModalForm(editStudent)'>  Update Personal Information</button></td></tr>
+
+        </table>
+
+      </div>
+      <div id="graph" class="col-8">
+          <app-statistics></app-statistics>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- <br>
+<div *ngIf='setUser'>
+  <form #addPass ="ngForm" id="userPass">
+
+      <li> <input type="text" name="username" placeholder="UserName" ngModel></li>
+      <li> <input type="text" name="password" placeholder="Password" ngModel></li>
+    <button (click)="updateUserPass(addPass)"> Update Password and Username </button>
+    <button (click)='cancelPassForm()'>  Cancel</button>
+  </form>
+</div>
+  <div *ngIf='upStudent'>
+    <form>
+      <ul>
+        <br>
+        <!-- <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li> -->
+        <!-- <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
+        <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="upStudent.lastName"></li>
+        <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="upStudent.email"></li>
+        <li> <input type="text" name="githubUsername" placeholder="GitHub" [(ngModel)]="upStudent.githubUsername"></li>
+        <li> <input type="text" name="EducationLevel" placeholder="Education" [(ngModel)]="upStudent.educationLevel"></li>
+        <li> <input type="text" name="Clearance" placeholder="Clearance" [(ngModel)]="upStudent.clearance"></li>
+        <li> Employed: <input type="checkbox" name="Employed" [(ngModel)]="upStudent.employed"></li>
+        <li> Accepted: <input type="checkbox" name="Accepted" [(ngModel)]="upStudent.accepted"></li>
+        <li> GiBill: <input type="checkbox" name="GiBill" [(ngModel)]="upStudent.gibill"></li>
+        <li> Vettec: <input type="checkbox" name="Vettec" [(ngModel)]="upStudent.vettec"></li>
+        <li> Deposit Paid: <input type="checkbox" name="DepositPaod" [(ngModel)]="upStudent.depositPaid"></li>
+        <li> Needs Loaner Laptop: <input type="checkbox" name="Needs Loaner Laptop"
+          [(ngModel)]="upStudent.needsLoanerLaptop"></li>
+          <li> Open to Relocation: <input type="checkbox" name="Open to Relocation"
+            [(ngModel)]="upStudent.openToRelocation"></li>
+
+            <button (click)="updateStudent()"> Confirm Update</button>
+            <button (click)='cancelEditStudent()'>  Cancel</button>
+    </ul>
+  </form>
+</div> -->
+
+    <!-- <div *ngIf='upAddress'>
+        <form>
+          <ul>
+            <br>
+            <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upAddress.id"></li>
+            <li> <input type="text" name="addressType" placeholder="Address Type" [(ngModel)]="upAddress.addressType"></li>
+            <li> <input type="text" name="street" placeholder="Street" [(ngModel)]="upAddress.street"></li>
+            <li> <input type="text" name="city" placeholder="City" [(ngModel)]="upAddress.city"></li>
+            <li> <input type="text" name="state" placeholder="State" [(ngModel)]="upAddress.state"></li>
+            <li> <input type="text" name="zipcode" placeholder="Zip Code" [(ngModel)]="upAddress.zipcode"></li>
+            <li> <input type="text" name="phone" placeholder="Phone" [(ngModel)]="upAddress.phone"></li>
+
+                <button (click)="updateAddress()"> Update Address </button>
+                <button (click)='cancelEditAddress()'>  Cancel</button>
+        </ul>
+      </form>
+    </div> -->
+    <!-- <div *ngIf='showAddressForm'>
+        <form #aAddress ="ngForm" id="addAddress">
+          <ul>
+            <br>
+
+            <li> <input type="text" name="addressType" placeholder="Address Type" ngModel></li>
+            <li> <input type="text" name="street" placeholder="Street" ngModel></li>
+            <li> <input type="text" name="city" placeholder="City" ngModel></li>
+            <li> <input type="text" name="state" placeholder="State" ngModel></li>
+            <li> <input type="text" name="zipcode" placeholder="Zip Code" ngModel></li>
+            <li> <input type="text" name="phone" placeholder="Phone" ngModel></li>
+
+                <button (click)="addAddress(aAddress)"> Add Address </button>
+                <button (click)='cancelAddressForm()'>  Cancel</button>
+        </ul>
+      </form>
+    </div>  -->
+
+    <app-student-modal  #modal [editStudent] = editStudent [editAddress] = editAddress [editUser] = editUser (childEvent)="reload()"></app-student-modal>
