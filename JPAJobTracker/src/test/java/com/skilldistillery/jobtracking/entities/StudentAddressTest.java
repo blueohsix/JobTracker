@@ -11,13 +11,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class StudentDesiredLocationTest {
+class StudentAddressTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private StudentDesiredLocation dL;
+	private StudentAddress studentAddress;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,18 +32,21 @@ class StudentDesiredLocationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		dL = em.find(StudentDesiredLocation.class, 1);
+		studentAddress = em.find(StudentAddress.class, 1);
+		System.out.println(studentAddress);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		dL = null;
+		studentAddress = null;
 	}
-	//@Disabled
+
+//	@Disabled
 	@Test
-	void test() {
-		assertEquals(1, dL.getId());
-		assertNotNull(dL);
+	void test_Cohort_entity_mapping() {
+		assertEquals(1, studentAddress.getId());
+		assertNotNull(studentAddress);
 	}
+	
 }

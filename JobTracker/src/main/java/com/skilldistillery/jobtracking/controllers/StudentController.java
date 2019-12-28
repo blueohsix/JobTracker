@@ -354,7 +354,7 @@ public class StudentController {
 //		*** Company needs Many to Many relationship for this to work ***
 //		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
 //		if (managedLoc == null) {
-			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
 //		}}
 
 		application.setCompany(managedCompany);
@@ -401,7 +401,7 @@ public class StudentController {
 //		*** Company needs Many to Many relationship for this to work ***
 //		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
 //		if (managedLoc == null) {
-			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
 //		}
 		
 		
