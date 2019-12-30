@@ -28,9 +28,9 @@ repositories {
  consistent across artifactIds
 */
 ext {
-  hibernateVersion = "5.4.2.Final"
-  mySqlConnectorVersion = "8.0.16"
-  junit5Version = "5.4.2"
+  hibernateVersion = "5.4.9.Final"
+  mySqlConnectorVersion = "8.0.18"
+  junit5Version = "5.5.2"
   
 }
 

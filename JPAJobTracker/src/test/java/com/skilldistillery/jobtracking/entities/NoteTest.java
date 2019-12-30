@@ -1,7 +1,7 @@
 package com.skilldistillery.jobtracking.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,12 +11,14 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ApplicationNoteTest {
+class NoteTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private ApplicationNote an;
+	private Note note;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,20 +32,24 @@ public class ApplicationNoteTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		an = em.find(ApplicationNote.class, 1);
+		 em = emf.createEntityManager();
+		 note = em.find(Note.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		an = null;
-	}
-
-	@Test
-	void test() {
-		assertEquals(1, an.getId());
-		assertNotNull(an);
+		note = null;
 	}
 	
+
+	@Test
+	@DisplayName("Tests if the note table is mapped correctly")
+	void test() {
+		assertEquals(1, note.getId());
+		assertEquals("SD22" , note.getStudent().getCohort().getName());
+		assertTrue(note.getText().startsWith("c"));
+	}
+
+
 }

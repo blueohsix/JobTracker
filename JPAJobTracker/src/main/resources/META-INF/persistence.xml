@@ -9,41 +9,24 @@
     </provider>
 
 		<!-- entities here -->
+		<class> com.skilldistillery.jobtracking.entities.Address</class>
 		<class> com.skilldistillery.jobtracking.entities.Application</class>
-		<class> com.skilldistillery.jobtracking.entities.ApplicationNote</class>
 		<class> com.skilldistillery.jobtracking.entities.Cohort</class>
-		<class> com.skilldistillery.jobtracking.entities.Company</class>
-		<class> com.skilldistillery.jobtracking.entities.CompanyLocation</class>
-		<class> com.skilldistillery.jobtracking.entities.CompanyNote</class>
 		<class> com.skilldistillery.jobtracking.entities.Contact</class>
-		<class> com.skilldistillery.jobtracking.entities.StudentDesiredLocation</class>
-		<class> com.skilldistillery.jobtracking.entities.Event</class>
-		<class> com.skilldistillery.jobtracking.entities.JobPost</class>
-		<class> com.skilldistillery.jobtracking.entities.Progress</class>
+		<class> com.skilldistillery.jobtracking.entities.Note</class>
 		<class> com.skilldistillery.jobtracking.entities.Student</class>
-		<class> com.skilldistillery.jobtracking.entities.StudentAddress</class>
 		<class> com.skilldistillery.jobtracking.entities.User</class>
 		<!-- entities here -->
 
 		<properties>
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/trackerdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
-
-			<property name="javax.persistence.jdbc.user" value="trackerdb" />
-			<property name="javax.persistence.jdbc.password"
-				value="tracker" />
-
-			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.cj.jdbc.Driver" />
-
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jobtracker?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
+			<property name="javax.persistence.jdbc.user" value="admin" />
+			<property name="javax.persistence.jdbc.password" value="admin" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
-
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQLDialect" />
-			<property name="hibernate.connection.provider_class"
-				value="org.hibernate.connection.C3P0ConnectionProvider" />
-
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
 			<property name="hibernate.c3p0.max_size" value="5" />
 			<property name="hibernate.c3p0.min_size" value="0" />
 			<property name="hibernate.c3p0.acquire_increment" value="1" />

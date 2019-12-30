@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,19 +26,11 @@ public class Cohort {
 	private String name;
 	private String nickname;
 	@OneToMany(mappedBy = "cohort")
-	@JsonIgnore
 	private List<Student> students;
-
-	public Cohort(int id, LocalDate startDate, LocalDate endDate, String name, String nickname, List<Student> students) {
-		super();
-		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.name = name;
-		this.nickname = nickname;
-		this.students = students;
-	}
-
+	@OneToOne
+    @JoinColumn(name="note_id")
+    private Note note;
+	
 	public Cohort() {
 		super();
 	}
@@ -89,6 +83,20 @@ public class Cohort {
 		this.students = students;
 	}
 
+	public Note getNote() {
+		return note;
+	}
+
+	public void setNote(Note note) {
+		this.note = note;
+	}
+
+	@Override
+	public String toString() {
+		return "Cohort [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", name=" + name
+				+ ", nickname=" + nickname + ", students=" + students.size() + ", note=" + note + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +118,7 @@ public class Cohort {
 			return false;
 		return true;
 	}
-
 	
+	
+
 }

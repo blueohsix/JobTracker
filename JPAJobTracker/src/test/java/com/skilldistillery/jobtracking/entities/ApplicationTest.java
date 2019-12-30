@@ -1,7 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,12 +10,14 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Application app;
+	private Application application;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,21 +31,24 @@ class ApplicationTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		app = em.find(Application.class, 1);
+		 em = emf.createEntityManager();
+		 application = em.find(Application.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		app = null;
+		application = null;
 	}
+	
 
 	@Test
-	void test_Cohort_entity_mapping() {
-		assertEquals(1, app.getId());
-		assertNotNull(app);
-
+	@DisplayName("Tests if the application table is mapped correctly")
+	void test() {
+		assertEquals(1, application.getId());
+		assertEquals("Garmin" , application.getCompany());
+		assertEquals("Katie Bones", application.getContacts().get(0).getName());
 	}
+
 
 }

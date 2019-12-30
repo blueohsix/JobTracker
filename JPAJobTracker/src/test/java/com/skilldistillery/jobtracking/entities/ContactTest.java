@@ -1,6 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +10,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ContactTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Contact contact;
@@ -29,8 +31,8 @@ class ContactTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		contact = em.find(Contact.class, 1);
+		 em = emf.createEntityManager();
+		 contact = em.find(Contact.class, 1);
 	}
 
 	@AfterEach
@@ -38,10 +40,15 @@ class ContactTest {
 		em.close();
 		contact = null;
 	}
+	
 
 	@Test
+	@DisplayName("Tests if the contact table is mapped correctly")
 	void test() {
 		assertEquals(1, contact.getId());
-		assertNotNull(contact);
+		assertEquals("Katie Bones" , contact.getName());
+		assertEquals("Garmin" , contact.getApplication().getCompany());
 	}
+
+
 }

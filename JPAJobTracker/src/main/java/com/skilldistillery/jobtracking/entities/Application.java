@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Application {
@@ -22,42 +21,20 @@ public class Application {
 	private String position;
 	@Column(name = "desc_url")
 	private String descriptionURL;
-	@Column(name = "interest_level")
-	private int interestLevel;
-	@OneToMany(mappedBy = "application")
-	private List<Progress> progress;
-	@OneToMany(mappedBy = "application")
+	private String company;
+	private String location;
+	private String progress;
+	@OneToOne
+    @JoinColumn(name="note_id")
+    private Note note;
+	@OneToMany(mappedBy="application")
 	private List<Contact> contacts;
-	@OneToMany(mappedBy = "application")
-	private List<ApplicationNote> applicationNotes;
 	@ManyToOne
-//	@Column(name = "student_id")
-//	private int studentId;
-	@JoinColumn(name = "student_id")
-	@JsonIgnore
+	@JoinColumn(name="student_id")
 	private Student student;
-//	@Column(name = "company_id")
-//	private int companyId;
-	@ManyToOne
-	@JoinColumn(name = "company_id")
-	private Company company;
-
+	
 	public Application() {
-
-	}
-
-	public Application(int id, String position, String descriptionURL, int interestLevel, List<Progress> progress,
-			List<Contact> contacts, List<ApplicationNote> applicationNotes, Student student, Company company) {
 		super();
-		this.id = id;
-		this.position = position;
-		this.descriptionURL = descriptionURL;
-		this.interestLevel = interestLevel;
-		this.progress = progress;
-		this.contacts = contacts;
-		this.applicationNotes = applicationNotes;
-		this.student = student;
-		this.company = company;
 	}
 
 	public int getId() {
@@ -84,20 +61,36 @@ public class Application {
 		this.descriptionURL = descriptionURL;
 	}
 
-	public int getInterestLevel() {
-		return interestLevel;
+	public String getCompany() {
+		return company;
 	}
 
-	public void setInterestLevel(int interestLevel) {
-		this.interestLevel = interestLevel;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
-	public List<Progress> getProgress() {
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getProgress() {
 		return progress;
 	}
 
-	public void setProgress(List<Progress> progress) {
+	public void setProgress(String progress) {
 		this.progress = progress;
+	}
+
+	public Note getNote() {
+		return note;
+	}
+
+	public void setNote(Note note) {
+		this.note = note;
 	}
 
 	public List<Contact> getContacts() {
@@ -108,14 +101,6 @@ public class Application {
 		this.contacts = contacts;
 	}
 
-	public List<ApplicationNote> getApplicationNotes() {
-		return applicationNotes;
-	}
-
-	public void setApplicationNotes(List<ApplicationNote> applicationNotes) {
-		this.applicationNotes = applicationNotes;
-	}
-
 	public Student getStudent() {
 		return student;
 	}
@@ -124,12 +109,11 @@ public class Application {
 		this.student = student;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
+	@Override
+	public String toString() {
+		return "Application [id=" + id + ", position=" + position + ", descriptionURL=" + descriptionURL + ", company="
+				+ company + ", location=" + location + ", progress=" + progress + ", note=" + note + ", contacts="
+				+ contacts.size() + ", student=" + student.getFirstName() + " " + student.getLastName() + "]";
 	}
 
 	@Override
@@ -154,5 +138,5 @@ public class Application {
 		return true;
 	}
 
-	
+
 }

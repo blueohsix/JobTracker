@@ -1,7 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,9 +10,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CohortTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Cohort cohort;
@@ -30,8 +31,8 @@ class CohortTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		cohort = em.find(Cohort.class, 22);
+		 em = emf.createEntityManager();
+		 cohort = em.find(Cohort.class, 1);
 	}
 
 	@AfterEach
@@ -39,13 +40,15 @@ class CohortTest {
 		em.close();
 		cohort = null;
 	}
+	
 
 	@Test
-	void test_Cohort_entity_mapping() {
-		System.out.println(cohort);
-		assertEquals(22, cohort.getId());
-		assertNotNull(cohort);
-
+	@DisplayName("Tests if the cohort table is mapped correctly")
+	void test() {
+		assertEquals(1, cohort.getId());
+		assertEquals(1 , cohort.getStudents().size());
+		assertEquals("SD22" , cohort.getName());
 	}
+
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,80 +14,101 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-//	@Column(name = "application_id")
-//	private int applicationId;
-	@ManyToOne
-	@JoinColumn(name="application_id")
-	@JsonIgnore
-	private Application application;
-	
+	private int id;
 	private String name;
 	private String email;
 	private String phone;
 	private String position;
 	
+	@OneToOne
+    @JoinColumn(name="note_id")
+    private Note note;
+	@ManyToOne
+	@JoinColumn(name="application_id")
+	private Application application;
+	
+	
 	public Contact() {
-		
+		super();
 	}
 
-	public Contact(int id, Application application, String name, String email, String phone, String position) {
-		super();
-		this.id = id;
-		this.application = application;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.position = position;
-	}
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Application getApplication() {
-		return application;
-	}
-
-	public void setApplication(Application application) {
-		this.application = application;
-	}
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getPhone() {
 		return phone;
 	}
 
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 
 	public String getPosition() {
 		return position;
 	}
 
+
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+
+	public Note getNote() {
+		return note;
+	}
+
+
+	public void setNote(Note note) {
+		this.note = note;
+	}
+
+
+	public Application getApplication() {
+		return application;
+	}
+
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", position="
+				+ position + ", note=" + note + ", application=" + application.getCompany() + "]";
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -95,6 +117,7 @@ public class Contact {
 		result = prime * result + id;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -109,9 +132,7 @@ public class Contact {
 			return false;
 		return true;
 	}
-
 	
-
 	
-
+	
 }
