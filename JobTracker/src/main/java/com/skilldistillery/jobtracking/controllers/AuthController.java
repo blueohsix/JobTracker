@@ -15,21 +15,18 @@ import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.AuthService;
 
 @RestController
-@CrossOrigin({ "*", "http:localhost:6969" })
+@CrossOrigin({ "*", "http:localhost:4207" })
 public class AuthController {
 	@Autowired
-	private AuthService serv;
+	private AuthService service;
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public User register(@RequestBody User user, HttpServletResponse res) {
-
 		if (user == null) {
 			res.setStatus(400);
 			return null;
 		}
-
-		user = serv.register(user);
-
+		user = service.register(user);
 		return user;
 	}
 

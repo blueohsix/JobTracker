@@ -5,6 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin({ "*", "http:localhost:4207" })
-public class StudentController {
+public class AdminController {
 
 }

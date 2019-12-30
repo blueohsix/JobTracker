@@ -21,8 +21,6 @@ public class SdJobTrackerApplication  extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(SdJobTrackerApplication.class, args);
 	}
-	
-	
 
 	@Bean
 	public PasswordEncoder configurePasswordEncoder() {

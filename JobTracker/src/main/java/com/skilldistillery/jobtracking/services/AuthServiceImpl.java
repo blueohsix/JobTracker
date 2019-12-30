@@ -11,7 +11,7 @@ import com.skilldistillery.jobtracking.repositories.UserRepository;
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired
-	UserRepository userrepo;
+	UserRepository repo;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -19,15 +19,13 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public User register(User user) {
-		// encrypt and set the password for the user
 			String encryptedPassword = encoder.encode(user.getPassword());
 			user.setPassword(encryptedPassword);
-			//business decision to set enabled
 			user.setEnabled(true);
-		// set role field to standard
-			user.setRole("ADMIN");
-			
-			userrepo.saveAndFlush(user);
+			if(user.getRole() == null) {
+				user.setRole("student");
+			}
+			repo.saveAndFlush(user);
 			
 		return user;
 	}

@@ -8,17 +8,30 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+apply plugin: 'war'
+
+war {
+  enabled = true
+  archiveName = "${baseName}.war"     // Our app name, as defined in settings.gradle
+  destinationDir = file("./")         // Project root directory
+}
+
 repositories {
 	mavenCentral()
 }
 
+
+test {
+   useJUnitPlatform()
+}
+ 
+
 dependencies {
-	compile project(':JPAJobTracker')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'mysql:mysql-connector-java'
+	implementation ('org.springframework.boot:spring-boot-starter-tomcat')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
+	compile('org.springframework.boot:spring-boot-starter-security')
+	runtimeOnly 'mysql:mysql-connector-java'
+	compile project(':JPAJobTracker')
 }
