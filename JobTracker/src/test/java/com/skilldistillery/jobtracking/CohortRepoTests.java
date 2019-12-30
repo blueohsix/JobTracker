@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.skilldistillery.jobtracking.entities.Cohort;
-import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.repositories.CohortRepository;
 
 @ExtendWith(SpringExtension.class)
