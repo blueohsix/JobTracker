@@ -11,75 +11,71 @@ import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.repositories.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userrepo;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-	
-	
+
 	@Override
 	public User findByUserName(String username) {
-		
 		return userrepo.findByUsername(username);
 	}
-	
+
 	@Override
-	public List<User> index(){
+	public List<User> indexUsers() {
 		return userrepo.findAll();
 	}
+
 	@Override
-	public User show(Integer id){
-		
+	public User readUser(int id) {
 		Optional<User> user = userrepo.findById(id);
 		if (user.isPresent()) {
-			
 			return user.get();
-		} 
+		}
 		return null;
-		
+
 	}
-	
-	@Override 
-	public User create(User user) {
-		
-		User newUser = null;
-		if(user !=null ) {
-			 newUser = userrepo.saveAndFlush(user);
-		}
-		return newUser;
-	}
-	
-	@Override 
-	public User updateUserById(Integer id,User user ) {
-Optional<User> use = userrepo.findById(id);
-		User updateUser = null;
-		if(use.isPresent()) {
-			 updateUser = use.get();
-			updateUser.setPassword(encoder.encode(user.getPassword()));
-			updateUser.setUsername(user.getUsername());
-			updateUser.setEnabled(user.isEnabled());
-			userrepo.saveAndFlush(updateUser);
-		}
-		
-		return updateUser;
-	}
-	
+
 	@Override
-	public Boolean deleteUserById(Integer id) {
-	
-		Optional<User> use = userrepo.findById(id);
-		User deleteUser = null;
-		if(use.isPresent()) {
-			 deleteUser = use.get();
-			deleteUser.setEnabled(!deleteUser.isEnabled());
-			userrepo.saveAndFlush(deleteUser);
+	public User createUser(User user) {
+		return userrepo.saveAndFlush(user);
+	}
+
+	@Override
+	public User updateUser(User user) {
+		Optional<User> userOpt = userrepo.findById(user.getId());
+		User updatedUser = null;
+		if (userOpt.isPresent()) {
+			updatedUser = userOpt.get();
+			if (user.getPassword() != null) {
+				updatedUser.setPassword(encoder.encode(user.getPassword()));
+			}
+			if (user.getUsername() != null) {
+				updatedUser.setUsername(user.getUsername());
+			}
+			userrepo.saveAndFlush(updatedUser);
+		}
+
+		return updatedUser;
+	}
+
+	@Override
+	public boolean deleteUser(int id) {
+
+		Optional<User> user = userrepo.findById(id);
+		User disabledUser = null;
+		if (user.isPresent()) {
+			disabledUser = user.get();
+			disabledUser.setEnabled(!disabledUser.isEnabled());
+			userrepo.saveAndFlush(disabledUser);
+			System.err.println(disabledUser.getUsername() + " disabled successfully");
 			return true;
 		}
+		System.err.println("Failed to disable: " + user.toString());
 		return false;
 	}
-	
-	
-} // end Impl
+
+}

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.repositories.UserRepository;
 
@@ -20,14 +21,19 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public User register(User user) {
 			String encryptedPassword = encoder.encode(user.getPassword());
-			user.setPassword(encryptedPassword);
-			user.setEnabled(true);
-			if(user.getRole() == null) {
-				user.setRole("student");
+			try {
+				user.setPassword(encryptedPassword);
+				user.setEnabled(true);
+				if(user.getRole() == null) {
+					user.setRole("student");
+				}
+				repo.saveAndFlush(user);
+				return user;
+			} catch (Exception e) {
+				System.err.println("failed to register user: " + user);
+				return null;
 			}
-			repo.saveAndFlush(user);
 			
-		return user;
 	}
 
 
