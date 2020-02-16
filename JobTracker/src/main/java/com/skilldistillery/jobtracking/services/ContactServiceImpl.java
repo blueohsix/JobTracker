@@ -2,12 +2,17 @@ package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
 
-import com.skilldistillery.jobtracking.entities.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.skilldistillery.jobtracking.entities.Contact;
+import com.skilldistillery.jobtracking.repositories.ContactRepository;
 
 
 @Service
 public class ContactServiceImpl implements ContactService{
+//	@Autowired
+//	private ContactRepository repo;
 
 	@Override
 	public Contact createContact(Contact contact) {

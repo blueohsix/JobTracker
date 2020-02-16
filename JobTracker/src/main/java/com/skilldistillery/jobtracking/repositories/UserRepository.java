@@ -9,6 +9,5 @@ import com.skilldistillery.jobtracking.entities.User;
 
 public interface UserRepository  extends JpaRepository<User, Integer>{
 	public User findByUsername(String username);
-	List <Student> findByName(String name);
 	
 }

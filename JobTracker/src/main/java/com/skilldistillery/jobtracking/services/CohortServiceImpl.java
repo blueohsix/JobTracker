@@ -2,12 +2,17 @@ package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
 
-import com.skilldistillery.jobtracking.entities.Cohort;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.skilldistillery.jobtracking.entities.Cohort;
+import com.skilldistillery.jobtracking.repositories.CohortRepository;
 
 
 @Service
 public class CohortServiceImpl implements CohortService {
+//	@Autowired
+//	private CohortRepository repo;
 
 	@Override
 	public Cohort createCohort(Cohort cohort) {

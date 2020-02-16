@@ -12,7 +12,6 @@ import com.skilldistillery.jobtracking.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-
 	@Autowired
 	private UserRepository userrepo;
 

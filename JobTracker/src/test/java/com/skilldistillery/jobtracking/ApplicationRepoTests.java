@@ -2,6 +2,7 @@ package com.skilldistillery.jobtracking;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -11,30 +12,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.skilldistillery.jobtracking.entities.User;
-import com.skilldistillery.jobtracking.repositories.UserRepository;
+import com.skilldistillery.jobtracking.entities.Application;
+import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class ApplicationRepoTests {
 	@Autowired
-	private UserRepository repo;
+	private ApplicationRepository repo;
 
 	@Test
 	@DisplayName("Tests if repo is mapped correctly")
 	public void test1() {
-		Optional<User> userOpt = repo.findById(1);
-		User user = null;
-		if (userOpt.isPresent()) {
-			user = userOpt.get();
+		Optional<Application> applicationOpt = repo.findById(1);
+		Application application = null;
+		if (applicationOpt.isPresent()) {
+			application = applicationOpt.get();
 		}
-		assertEquals(1, user.getId());
+		assertEquals(1, application.getId());
 	}
 	@Test
-	@DisplayName("Tests if repo findbyusername is functional")
+	@DisplayName("Tests if repo is functional")
 	public void test2() {
-		User user = repo.findByUsername("casey.e.asher");
-		assertEquals("casey.e.asher", user.getUsername());
+		List<Application> application = repo.findByCompany("Garmin");
+		assertEquals("Garmin", application.get(0).getCompany());
 	}
 
 }

@@ -2,6 +2,7 @@ package com.skilldistillery.jobtracking;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -33,8 +34,8 @@ class ContactRepoTests {
 	@Test
 	@DisplayName("Tests if repo findByName is functional")
 	public void test2() {
-		Contact contact = repo.findByName("Katie Bones");
-		assertEquals("Katie Bones", contact.getName() );
+		List<Contact> contacts = repo.findByName("Katie Bones");
+		assertEquals("Katie Bones", contacts.get(0).getName());
 	}
 
 }

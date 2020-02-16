@@ -2,12 +2,17 @@ package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Application;
+import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
+//	@Autowired
+//	private ApplicationRepository repo;
+	
 
 	@Override
 	public Application createApplication(Application application) {
