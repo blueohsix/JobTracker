@@ -14,6 +14,7 @@ Final Team Project for Skill Distillery's 16 Week Full-Stack Bootcamp
 ### Maintenance and Usability Updates
 ##### February 17th, 2020
   - CRUD on User
+  - CRUD on Cohort
 
 ##### December 30th
   - Database restructured (7 tables now)
