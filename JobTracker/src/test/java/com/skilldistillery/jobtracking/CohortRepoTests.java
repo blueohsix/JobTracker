@@ -2,6 +2,7 @@ package com.skilldistillery.jobtracking;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -33,8 +34,8 @@ class CohortRepoTests {
 	@Test
 	@DisplayName("Tests if repo findByName is functional")
 	public void test2() {
-		Cohort cohort = repo.findByName("SD22");
-		assertEquals("2019-07-08" , cohort.getStartDate().toString());
+		List<Cohort> cohort = repo.findByName("SD22");
+		assertEquals(1, cohort.size());
 	}
 
 }

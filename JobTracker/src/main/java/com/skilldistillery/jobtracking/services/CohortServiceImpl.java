@@ -1,6 +1,7 @@
 package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,47 +9,77 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.jobtracking.entities.Cohort;
 import com.skilldistillery.jobtracking.repositories.CohortRepository;
 
-
 @Service
 public class CohortServiceImpl implements CohortService {
-//	@Autowired
-//	private CohortRepository repo;
+	@Autowired
+	private CohortRepository cohortRepo;
 
 	@Override
 	public Cohort createCohort(Cohort cohort) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (!cohortRepo.findByName(cohort.getName()).isEmpty()) {
+				System.err.println(cohort.getName() + " already exists");
+				return null;
+			}
+			System.err.println(cohort);
+			Cohort savedCohort;
+			savedCohort = cohortRepo.saveAndFlush(cohort);
+			return savedCohort;
+
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 
 	@Override
 	public Cohort readCohort(int id) {
-		// TODO Auto-generated method stub
+		Optional<Cohort> cohort = cohortRepo.findById(id);
+		if (cohort.isPresent()) {
+			return cohort.get();
+		}
 		return null;
 	}
 
 	@Override
-	public Cohort findByName(String cohortName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Cohort> findByName(String cohortName) {
+		return cohortRepo.findByName(cohortName);
+
 	}
 
 	@Override
 	public List<Cohort> indexCohorts() {
-		// TODO Auto-generated method stub
-		return null;
+		return cohortRepo.findAll();
 	}
 
 	@Override
 	public Cohort updateCohort(Cohort cohort) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Cohort> cohortOpt = cohortRepo.findById(cohort.getId());
+		Cohort updatedCohort = null;
+		try {
+			if (cohortOpt.isPresent()) {
+				updatedCohort = cohort;
+				return cohortRepo.saveAndFlush(updatedCohort);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 
 	@Override
 	public boolean deleteCohort(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		if(cohortRepo.existsById(id)) {
+			cohortRepo.deleteById(id);
+			return true;
+		}
+		else {
+			System.err.println("Cohort id " + id + " does not exist");
+			return false;
+		}
+		
 	}
-
 
 }

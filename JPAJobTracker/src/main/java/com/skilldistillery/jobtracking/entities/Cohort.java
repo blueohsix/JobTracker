@@ -25,8 +25,10 @@ public class Cohort {
 	private LocalDate endDate;
 	private String name;
 	private String nickname;
+	@JsonIgnore
 	@OneToMany(mappedBy = "cohort")
 	private List<Student> students;
+	@JsonIgnore
 	@OneToOne
     @JoinColumn(name="note_id")
     private Note note;
@@ -94,7 +96,7 @@ public class Cohort {
 	@Override
 	public String toString() {
 		return "Cohort [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", name=" + name
-				+ ", nickname=" + nickname + ", students=" + students.size() + ", note=" + note + "]";
+				+ ", nickname=" + nickname;
 	}
 
 	@Override

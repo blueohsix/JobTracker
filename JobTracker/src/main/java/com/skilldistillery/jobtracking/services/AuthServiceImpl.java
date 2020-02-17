@@ -24,6 +24,10 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public User register(User user) {
 			try {
+				if (userRepo.findByUsername(user.getUsername()) != null) {
+					System.err.println(user.getUsername() + " already exists");
+					return null;
+				}
 				user.setEnabled(true);
 				if(user.getRole().equalsIgnoreCase("student")) {
 					user.setPassword(encoder.encode("getSkilled"));
