@@ -44,7 +44,7 @@ class UserTest {
 	
 
 	@Test
-	@DisplayName("Tests if the address table is mapped correctly")
+	@DisplayName("Tests if the user table is mapped correctly")
 	void test() {
 		assertEquals(1, user.getId());
 		assertEquals("casey.e.asher", user.getUsername());

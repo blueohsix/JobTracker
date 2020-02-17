@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Student {
@@ -39,17 +41,21 @@ public class Student {
 	@Column(name = "open_to_relocation")
 	private boolean openToRelocation;
 	private String clearance;
+	@JsonIgnore
 	@OneToOne
     @JoinColumn(name="user_id")
     private User user;
+	@JsonIgnore
 	@OneToOne
     @JoinColumn(name="note_id")
     private Note note;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cohort_id")
 	private Cohort cohort;
 	@OneToMany(mappedBy="student")
 	private List<Address> addresses;
+	@JsonIgnore
 	@OneToMany(mappedBy="student")
 	private List<Application> applications;
 	

@@ -6,13 +6,16 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
+import com.skilldistillery.jobtracking.repositories.StudentRepository;
 import com.skilldistillery.jobtracking.repositories.UserRepository;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired
-	UserRepository repo;
+	UserRepository userRepo;
+	@Autowired
+	StudentRepository studentRepo;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -20,21 +23,31 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public User register(User user) {
-			String encryptedPassword = encoder.encode(user.getPassword());
 			try {
-				user.setPassword(encryptedPassword);
 				user.setEnabled(true);
-				if(user.getRole() == null) {
-					user.setRole("student");
+				if(user.getRole().equalsIgnoreCase("student")) {
+					user.setPassword(encoder.encode("getSkilled"));
+					User savedUser = userRepo.saveAndFlush(user);
+					Student newStudent = new Student();
+					newStudent.setEmail(user.getUsername());
+					newStudent.setUser(savedUser);
+					Student savedStudent = studentRepo.saveAndFlush(newStudent);
+					System.out.println(savedStudent);
+					return savedUser;
 				}
-				repo.saveAndFlush(user);
-				return user;
+				if(user.getRole().equalsIgnoreCase("admin")) {
+					user.setPassword(encoder.encode("giveSkills"));
+					User savedUser = userRepo.saveAndFlush(user);
+					return savedUser;
+				}
 			} catch (Exception e) {
 				System.err.println("failed to register user: " + user);
-				return null;
+				return user;
 			}
+			return null;
 			
 	}
+	
 
 
 }

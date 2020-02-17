@@ -1,5 +1,6 @@
 package com.skilldistillery.jobtracking.services;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,21 +40,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
-		return userrepo.saveAndFlush(user);
-	}
-
-	@Override
-	public User updateUser(User user) {
+	public User updateUser(User user, Principal principal) {
 		Optional<User> userOpt = userrepo.findById(user.getId());
 		User updatedUser = null;
 		if (userOpt.isPresent()) {
 			updatedUser = userOpt.get();
-			if (user.getPassword() != null) {
+			if (!user.getPassword().startsWith("$")) {
 				updatedUser.setPassword(encoder.encode(user.getPassword()));
 			}
-			if (user.getUsername() != null) {
+			if (principal.toString().contains("Granted Authorities: admin")
+					&& user.getUsername() != updatedUser.getUsername()) {
 				updatedUser.setUsername(user.getUsername());
+			}
+			if (principal.toString().contains("Granted Authorities: admin")
+					&& user.getRole() != updatedUser.getRole()) {
+				updatedUser.setRole(user.getRole());
 			}
 			userrepo.saveAndFlush(updatedUser);
 		}
@@ -62,18 +63,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean deleteUser(int id) {
-
+	public boolean toggleUser(int id) {
 		Optional<User> user = userrepo.findById(id);
-		User disabledUser = null;
+		User toggleUser = null;
 		if (user.isPresent()) {
-			disabledUser = user.get();
-			disabledUser.setEnabled(!disabledUser.isEnabled());
-			userrepo.saveAndFlush(disabledUser);
-			System.err.println(disabledUser.getUsername() + " disabled successfully");
-			return true;
+			toggleUser = user.get();
+			toggleUser.setEnabled(!toggleUser.isEnabled());
+			try {
+				userrepo.saveAndFlush(toggleUser);
+				return toggleUser.isEnabled();
+			} catch (Exception e) {
+				System.err.println(e);
+				return toggleUser.isEnabled();
+			}
+
 		}
-		System.err.println("Failed to disable: " + user.toString());
+		System.err.println("Failed to toggle: " + user.toString());
 		return false;
 	}
 
