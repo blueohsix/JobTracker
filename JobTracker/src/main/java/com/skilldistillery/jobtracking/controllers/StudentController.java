@@ -21,11 +21,10 @@ import com.skilldistillery.jobtracking.services.StudentService;
 public class StudentController {
 	@Autowired
 	private StudentService studentService;
-	
+
 	@GetMapping("student/")
-	public List<Student> indexStudents(HttpServletRequest request,
-			HttpServletResponse response, Principal principal) {
-	    return studentService.indexStudents();
+	public List<Student> indexStudents(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+		return studentService.indexStudents();
 	}
 
 }

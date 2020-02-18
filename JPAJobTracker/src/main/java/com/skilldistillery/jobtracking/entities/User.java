@@ -15,81 +15,62 @@ public class User {
 	private String password;
 	private String username;
 	private String role;
-	@OneToOne(mappedBy="user")
-    private Student student;
-	
-	
+	@OneToOne(mappedBy = "user")
+	private Student student;
+
 	public User() {
 		super();
 	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public boolean isEnabled() {
 		return enabled;
 	}
 
-
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public String getRole() {
 		return role;
 	}
 
-
 	public void setRole(String role) {
 		this.role = role;
 	}
 
-
-	public Student getStudent() {
-		return student;
-	}
-
-
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", enabled=" + enabled + ", password=" + password + ", username=" + username
 				+ ", role=" + role + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -98,7 +79,6 @@ public class User {
 		result = prime * result + id;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -113,7 +93,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

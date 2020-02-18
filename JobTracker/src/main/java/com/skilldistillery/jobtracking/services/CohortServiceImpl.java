@@ -33,7 +33,7 @@ public class CohortServiceImpl implements CohortService {
 	}
 
 	@Override
-	public Cohort readCohort(int id) {
+	public Cohort retrieveCohort(int id) {
 		Optional<Cohort> cohort = cohortRepo.findById(id);
 		if (cohort.isPresent()) {
 			return cohort.get();
@@ -71,15 +71,14 @@ public class CohortServiceImpl implements CohortService {
 
 	@Override
 	public boolean deleteCohort(int id) {
-		if(cohortRepo.existsById(id)) {
+		if (cohortRepo.existsById(id)) {
 			cohortRepo.deleteById(id);
 			return true;
-		}
-		else {
+		} else {
 			System.err.println("Cohort id " + id + " does not exist");
 			return false;
 		}
-		
+
 	}
 
 }

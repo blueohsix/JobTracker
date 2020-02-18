@@ -12,7 +12,6 @@ import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
 public class ApplicationServiceImpl implements ApplicationService {
 //	@Autowired
 //	private ApplicationRepository repo;
-	
 
 	@Override
 	public Application createApplication(Application application) {
@@ -25,7 +24,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public List<Application> findByCompany(String company) {
 		// TODO Auto-generated method stub
@@ -49,6 +48,5 @@ public class ApplicationServiceImpl implements ApplicationService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 }

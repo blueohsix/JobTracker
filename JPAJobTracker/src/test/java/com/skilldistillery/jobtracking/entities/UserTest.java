@@ -1,7 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,8 +46,7 @@ class UserTest {
 	@DisplayName("Tests if the user table is mapped correctly")
 	void test() {
 		assertEquals(1, user.getId());
-		assertEquals("casey.e.asher", user.getUsername());
-		assertTrue(user.getStudent().getVettec());
+		assertEquals("casey.e.asher@outlook.com", user.getUsername());
 	}
 
 

@@ -8,5 +8,5 @@ import com.skilldistillery.jobtracking.entities.Contact;
 
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	public List<Contact> findByName(String name);
-	
+
 }

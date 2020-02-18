@@ -1,6 +1,7 @@
 package com.skilldistillery.jobtracking.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.jobtracking.entities.Cohort;
+import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.AuthService;
 import com.skilldistillery.jobtracking.services.CohortService;
+import com.skilldistillery.jobtracking.services.StudentService;
 import com.skilldistillery.jobtracking.services.UserService;
 
 @RestController
@@ -33,13 +36,15 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private CohortService cohortService;
+	@Autowired
+	private StudentService studentService;
 
 	// USER
 
 	@PostMapping("register")
 	public User createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response,
 			Principal principal) {
-		user = authService.register(user);
+		user = authService.register(user, principal);
 		return user;
 	}
 
@@ -67,35 +72,67 @@ public class AdminController {
 	}
 
 	// COHORT
+
 	@PostMapping("cohort")
 	public Cohort createCohort(@RequestBody Cohort cohort, HttpServletRequest request, HttpServletResponse response,
 			Principal principal) {
 		System.err.println(cohort);
 		return cohortService.createCohort(cohort);
 	}
+
 	@GetMapping("cohort")
-	public List<Cohort> readCohort( HttpServletRequest request, HttpServletResponse response,
-			Principal principal) {
-			return cohortService.indexCohorts();
+	public List<Cohort> indexCohorts(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+		return cohortService.indexCohorts();
 	}
-	
+
 	@GetMapping("cohort/{identifier}")
-	public List<Cohort> readCohort(@PathVariable("identifier") String identifier, HttpServletRequest request, HttpServletResponse response,
-			Principal principal) {
-			return cohortService.findByName(identifier);
+	public List<Cohort> retrieveCohorts(@PathVariable("identifier") String identifier, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		return cohortService.findByName(identifier);
 	}
-	
+
 	@PutMapping("cohort")
 	public Cohort updateCohort(@RequestBody Cohort cohort, HttpServletRequest request, HttpServletResponse response,
 			Principal principal) {
 		return cohortService.updateCohort(cohort);
 	}
-	
+
 	@DeleteMapping("cohort/{id}")
 	public boolean deleteCohort(@PathVariable("id") int id, HttpServletRequest request, HttpServletResponse response,
 			Principal principal) {
 		return cohortService.deleteCohort(id);
 	}
-	
+
+	// STUDENT
+
+	@GetMapping("student")
+	public List<Student> indexStudents(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+		return studentService.indexStudents();
+	}
+
+	@GetMapping("student/{identifier}")
+	public List<Student> retrieveStudents(@PathVariable("identifier") String identifier, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		try {
+			int id = Integer.parseInt(identifier);
+			List<Student> student = new ArrayList<Student>();
+			student.add(studentService.retrieveStudent(id));
+			return student;
+		} catch (Exception e) {
+			return studentService.findByName(identifier);
+		}
+	}
+
+	@PutMapping("student")
+	public Student updateStudent(@RequestBody Student student, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
+		return studentService.updateStudent(student);
+	}
+
+	@DeleteMapping("student/{id}")
+	public boolean deleteStudent(@PathVariable("id") int id, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
+		return studentService.deleteStudent(id);
+	}
 
 }

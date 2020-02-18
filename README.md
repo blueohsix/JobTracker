@@ -1,5 +1,5 @@
 ### Job Tracker
-Final Team Project for Skill Distillery's 16 Week Full-Stack Bootcamp
+Refactor of Team Project for Skill Distillery's 16 Week Full-Stack Bootcamp
 
 #### Original Team
 * [Branden Bent](https://github.com/BrandenBent) - Developer, Scrum Master
@@ -15,6 +15,7 @@ Final Team Project for Skill Distillery's 16 Week Full-Stack Bootcamp
 ##### February 17th, 2020
   - CRUD on User
   - CRUD on Cohort
+  - CRUD on Student
 
 ##### December 30th
   - Database restructured (7 tables now)

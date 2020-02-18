@@ -9,9 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.skilldistillery.jobtracking.entities.Cohort;
 
 public interface CohortRepository extends JpaRepository<Cohort, Integer> {
-	@Query(value="SELECT c From Cohort c WHERE c.name LIKE %:name%")
-	public List<Cohort> findByName(@Param("name")String cohortName);
-	
-	
+	@Query(value = "SELECT c From Cohort c WHERE c.name LIKE %:name%")
+	public List<Cohort> findByName(@Param("name") String cohortName);
 
 }

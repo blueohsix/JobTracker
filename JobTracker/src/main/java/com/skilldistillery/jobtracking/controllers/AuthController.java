@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin({ "*", "http:localhost:4207" })
 public class AuthController {
-	
+
 	@RequestMapping(path = "/authenticate", method = RequestMethod.GET)
 	public Principal authenticate(Principal principal) {
 		return principal;

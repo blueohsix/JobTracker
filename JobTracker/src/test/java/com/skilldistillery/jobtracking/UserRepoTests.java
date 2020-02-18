@@ -34,7 +34,7 @@ class UserRepoTests {
 	@DisplayName("Tests if repo findByUsername is functional")
 	public void test2() {
 		User user = repo.findByUsername("casey.e.asher@outlook.com");
-		assertEquals("Asher", user.getStudent().getLastName());
+		assertEquals("student", user.getRole());
 	}
 
 }

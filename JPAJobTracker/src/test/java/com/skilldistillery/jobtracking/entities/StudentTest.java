@@ -47,7 +47,6 @@ class StudentTest {
 	void test() {
 		assertEquals(1, student.getId());
 		assertEquals("casey.e.asher@outlook.com" ,student.getEmail());
-		assertEquals("admin" , student.getUser().getRole());
 	}
 
 

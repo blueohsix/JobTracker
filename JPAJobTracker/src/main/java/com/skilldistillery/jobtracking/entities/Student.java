@@ -14,7 +14,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 public class Student {
 	@Id
@@ -41,172 +40,137 @@ public class Student {
 	@Column(name = "open_to_relocation")
 	private boolean openToRelocation;
 	private String clearance;
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	@JsonIgnore
 	@OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
-	@JsonIgnore
-	@OneToOne
-    @JoinColumn(name="note_id")
-    private Note note;
-	@JsonIgnore
+	@JoinColumn(name = "note_id")
+	private Note note;
 	@ManyToOne
-	@JoinColumn(name="cohort_id")
+	@JoinColumn(name = "cohort_id")
 	private Cohort cohort;
-	@OneToMany(mappedBy="student")
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
 	private List<Address> addresses;
 	@JsonIgnore
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<Application> applications;
-	
-	
+
 	public Student() {
 		super();
 	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 	public String getLastName() {
 		return lastName;
 	}
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getGithubUsername() {
 		return githubUsername;
 	}
 
-
 	public void setGithubUsername(String githubUsername) {
 		this.githubUsername = githubUsername;
 	}
-
 
 	public boolean getVettec() {
 		return vettec;
 	}
 
-
 	public void setVettec(boolean vettec) {
 		this.vettec = vettec;
 	}
-
 
 	public boolean getGiBill() {
 		return giBill;
 	}
 
-
 	public void setGiBill(boolean giBill) {
 		this.giBill = giBill;
 	}
-
 
 	public boolean getEmployed() {
 		return employed;
 	}
 
-
 	public void setEmployed(boolean employed) {
 		this.employed = employed;
 	}
-
 
 	public boolean getAccepted() {
 		return accepted;
 	}
 
-
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
 	}
-
 
 	public boolean getDepositPaid() {
 		return depositPaid;
 	}
 
-
 	public void setDepositPaid(boolean depositPaid) {
 		this.depositPaid = depositPaid;
 	}
-
 
 	public boolean getNeedsLoanerLaptop() {
 		return needsLoanerLaptop;
 	}
 
-
 	public void setNeedsLoanerLaptop(boolean needsLoanerLaptop) {
 		this.needsLoanerLaptop = needsLoanerLaptop;
 	}
-
 
 	public String getEducationLevel() {
 		return educationLevel;
 	}
 
-
 	public void setEducationLevel(String educationLevel) {
 		this.educationLevel = educationLevel;
 	}
-
 
 	public boolean getOpenToRelocation() {
 		return openToRelocation;
 	}
 
-
 	public void setOpenToRelocation(boolean openToRelocation) {
 		this.openToRelocation = openToRelocation;
 	}
-
 
 	public String getClearance() {
 		return clearance;
 	}
 
-
 	public void setClearance(String clearance) {
 		this.clearance = clearance;
-	}
-
-
-	public User getUser() {
-		return user;
 	}
 
 
@@ -214,57 +178,53 @@ public class Student {
 		this.user = user;
 	}
 
-
 	public Note getNote() {
 		return note;
 	}
-
 
 	public void setNote(Note note) {
 		this.note = note;
 	}
 
-
 	public Cohort getCohort() {
 		return cohort;
 	}
-
 
 	public void setCohort(Cohort cohort) {
 		this.cohort = cohort;
 	}
 
-
 	public List<Address> getAddresses() {
 		return addresses;
 	}
-
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 
-
 	public List<Application> getApplications() {
 		return applications;
 	}
-
 
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", githubUsername=" + githubUsername + ", vettec=" + vettec + ", giBill=" + giBill + ", employed="
-				+ employed + ", accepted=" + accepted + ", depositPaid=" + depositPaid + ", needsLoanerLaptop="
-				+ needsLoanerLaptop + ", educationLevel=" + educationLevel + ", openToRelocation=" + openToRelocation
-				+ ", clearance=" + clearance + ", user=" + user + ", note=" + note + ", cohort=" + cohort.getName()
-				+ ", addresses=" + addresses.size() + ", applications=" + applications.size() + "]";
+		try {
+			return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+					+ ", githubUsername=" + githubUsername + ", vettec=" + vettec + ", giBill=" + giBill + ", employed="
+					+ employed + ", accepted=" + accepted + ", depositPaid=" + depositPaid + ", needsLoanerLaptop="
+					+ needsLoanerLaptop + ", educationLevel=" + educationLevel + ", openToRelocation="
+					+ openToRelocation + ", clearance=" + clearance + ", user=" + user + ", note=" + note + ", cohort="
+					+ cohort.getName() + ", addresses=" + addresses.size() + ", applications=" + applications.size()
+					+ "]";
+		} catch (Exception e) {
+			return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+					+ "]";
+		}
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -273,7 +233,6 @@ public class Student {
 		result = prime * result + id;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -288,6 +247,5 @@ public class Student {
 			return false;
 		return true;
 	}
-	
-	
+
 }
