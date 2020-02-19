@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.skilldistillery.jobtracking.entities.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application, Integer> {
-	public List<Application> findByCompany(String company);
+	public List<Application> findByStudentId(int id);
 }

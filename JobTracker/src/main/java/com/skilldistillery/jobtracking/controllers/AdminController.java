@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.Cohort;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
+import com.skilldistillery.jobtracking.services.ApplicationService;
 import com.skilldistillery.jobtracking.services.AuthService;
 import com.skilldistillery.jobtracking.services.CohortService;
 import com.skilldistillery.jobtracking.services.StudentService;
@@ -33,11 +35,13 @@ public class AdminController {
 	@Autowired
 	private AuthService authService;
 	@Autowired
-	private UserService userService;
+	private ApplicationService applicationService;
 	@Autowired
 	private CohortService cohortService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private UserService userService;
 
 	// USER
 
@@ -133,6 +137,11 @@ public class AdminController {
 	public boolean deleteStudent(@PathVariable("id") int id, HttpServletRequest request, HttpServletResponse response,
 			Principal principal) {
 		return studentService.deleteStudent(id);
+	}
+	@GetMapping("application/{studentId}")
+	public List<Application> applicationsByStudent(@PathVariable("studentId") int id, HttpServletRequest request, HttpServletResponse response,
+			Principal principal){
+		return applicationService.findByStudent(id);
 	}
 
 }
