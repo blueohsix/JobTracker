@@ -12,25 +12,3 @@ Refactor of Team Project for Skill Distillery's 16 Week Full-Stack Bootcamp
 
 
 ### Maintenance and Usability Updates
-##### February 19th
-  - CRUD on Note
-  - CRUD on Contact
-  - CRUD on Address
-
-##### February 18th
-  - CRUD on Application
-
-##### February 17th, 2020
-  - CRUD on User
-  - CRUD on Cohort
-  - CRUD on Student
-
-##### December 30th
-  - Database restructured (7 tables now)
-  - Entities mapped, tests passing
-  - Repos rebuilt, tests passing
-  - Services and Impls stubbed
-
-##### December 27th, 2019
-  - Dependencies updated.
-  - Project and STS package names simplified
