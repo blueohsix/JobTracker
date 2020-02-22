@@ -9,13 +9,13 @@
     </provider>
 
 		<!-- entities here -->
-		<class> com.skilldistillery.jobtracking.entities.Address</class>
-		<class> com.skilldistillery.jobtracking.entities.Application</class>
-		<class> com.skilldistillery.jobtracking.entities.Cohort</class>
-		<class> com.skilldistillery.jobtracking.entities.Contact</class>
-		<class> com.skilldistillery.jobtracking.entities.Note</class>
-		<class> com.skilldistillery.jobtracking.entities.Student</class>
-		<class> com.skilldistillery.jobtracking.entities.User</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Address</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Application</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Cohort</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Contact</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Note</class>
+		<class> com.skilldistillery.jpajobtracker.entities.Student</class>
+		<class> com.skilldistillery.jpajobtracker.entities.User</class>
 		<!-- entities here -->
 
 		<properties>
